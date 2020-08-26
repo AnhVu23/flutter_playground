@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
-  var questionIndex = 0;
-  void answerQuestion() {
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+  void _answerQuestion() {
     setState(() {
-      questionIndex++;
+      _questionIndex++;
     });
   }
   @override
@@ -28,15 +29,15 @@ class MyAppState extends State<MyApp> {
         title: Text('Flutter playground'),
       ),
       body: Column(children: [
-        Text(questions.elementAt(questionIndex)),
-        RaisedButton(child: Text('1'), onPressed: answerQuestion,),
-        RaisedButton(child: Text('2'), onPressed: answerQuestion,),
-        RaisedButton(child: Text('3'), onPressed: answerQuestion,),
+        Question(questions.elementAt(_questionIndex)),
+        RaisedButton(child: Text('1'), onPressed: _answerQuestion,),
+        RaisedButton(child: Text('2'), onPressed: _answerQuestion,),
+        RaisedButton(child: Text('3'), onPressed: _answerQuestion,),
       ]),
       
     ), );
   }
-  }
+}
 
 void main() {
   runApp(MyApp());    
