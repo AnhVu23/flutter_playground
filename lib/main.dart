@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
-  static const questions = [
+  static const _questions = [
     {
       'questionText': 'What \'s your favorite animals?',
       'answer': ['Dog', 'Cat', 'Elephant']
@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     },
   ];
   void _answerQuestion() {
-    if (_questionIndex < questions.length) {
+    if (_questionIndex < _questions.length) {
       setState(() {
         _questionIndex++;
       });
@@ -43,13 +43,8 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Flutter playground'),
         ),
-        body: _questionIndex < questions.length ? Column(children: [
-          Question(questions[_questionIndex]['questionText']),
-          ...(questions[_questionIndex]['answer'] as List<String>)
-              .map((answer) {
-            return Answer(_answerQuestion, answer);
-          }).toList()
-        ]) : Center(child: Text('Running out of question')),
+        body: _questionIndex < _questions.length ? Quiz(questions: _questions,questionIndex: _questionIndex,answerQuestion: _answerQuestion) 
+        : Result(),
       ),
     );
   }
